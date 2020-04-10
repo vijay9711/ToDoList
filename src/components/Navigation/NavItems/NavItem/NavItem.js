@@ -1,11 +1,12 @@
 import React from 'react';
 import styled from "styled-components";
+import { NavLink } from "react-router-dom";
 
 const Li = styled.li`
     display:flex;
     height: 100%;
 `
-const A = styled.a`
+const StyledNav = styled(NavLink)`
     display: flex;
     text-transform: uppercase;
     align-items: center;
@@ -17,23 +18,17 @@ const A = styled.a`
     color: var(--color-white);
     transition: all 0.2s;
     &:hover {
-        border-bottom: ${props =>
-        props.mobile
-            ? '1px solid var(--color-white)'
-            : '2px solid var(--color-white);'};
+        border-bottom: ${props => props.mobile ? '1px solid var(--color-white)' : '2px solid var(--color-white);'};
     }
     &.active {
-        border-bottom: ${props =>
-        props.mobile
-            ? '1px solid var(--color-white)'
-            : '2px solid var(--color-white);'};
+        border-bottom: ${props => props.mobile ? '1px solid var(--color-white)' : '2px solid var(--color-white);'};
     }
 `
 
-const NavItem = ({ link, children }) => {
+const NavItem = ({ link, children, mobile, clicked }) => {
     return (
         <Li>
-            <A href={{ link }}>{children}</A>
+            <StyledNav activeClassName="active" exact to={link} mobile={mobile ? 1 : 0} onClick={clicked}>{children}</StyledNav>
         </Li>
     )
 }
